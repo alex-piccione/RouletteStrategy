@@ -87,7 +87,8 @@ let main argv =
                          strategy
         System.IO.File.AppendAllText("Results.log", result)
 
-    let strategy,strategyName = strategy_random,"random"
+    //let strategy,strategyName = strategy_random,"random"
+    let strategy,strategyName = strategy_3,"strategy 3"
 
     // main loop
     let rec play previousNumbers spinsCounter result logs =  
