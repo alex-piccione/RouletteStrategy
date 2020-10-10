@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="study DU with variable.fs" />
     <Compile Include="Entities.fs" />
     <Compile Include="Strategy.fs" />
   </ItemGroup>

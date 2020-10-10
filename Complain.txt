@@ -1,0 +1,14 @@
+# Complain
+
+The strategy suggest:
+- Bet against the dozen that is not appeared in the last 5 spins.
+
+This is counterintuitive because for the law of big numbers the distribution over the dozens tend to be uniform in a long period 
+thus it makes more sense to to think that the "missing" dozen is a favourite. Why bet against it?
+
+The strategy suggest:
+- I used a standard martingale (doubling bet) [...] I prefer an incremental betting structure ...
+Like what, which one. How to calculate the next bet ?
+
+
+
