@@ -1,0 +1,14 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.ionide
+/.vs/RouletteStarategy/DesignTimeBuild
+/.vs/RouletteStarategy/v16
+/.vs/RouletteStrategy/DesignTimeBuild
+/.vs/RouletteStrategy/v16
+/.vs
+/ConsoleApp/bin/Debug/netcoreapp3.1
+
+**/bin
+**/obj
