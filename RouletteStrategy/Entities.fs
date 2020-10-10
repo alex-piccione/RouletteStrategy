@@ -28,10 +28,10 @@ module Entities =
         | Lost
         | Skip
 
-    
+        
     type GameResult = 
-        { Spins:int; Wins:int; Losses:int; InitialBalance:float; FinalBalance:float }
+        { Spins:int; Wins:int; Losses:int; WinLostRatio:float }
 
         static member New () = 
-            { Spins=0; Wins=0; Losses=0; InitialBalance=0.0; FinalBalance=0.0 }
+            { Spins=0; Wins=0; Losses=0; WinLostRatio=0.0 }
             

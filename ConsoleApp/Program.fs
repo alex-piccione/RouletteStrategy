@@ -12,10 +12,8 @@ let main argv =
     // Settings
     let DOUBLE_ZERO = false
     let PREVIOUS_NUMBERS = 5
-    let STOP_LOSS = 200.0
     let MAX_SLIPS = 1000
-    let INITIAL_BET = 2
-    let SPEED = 1000
+    let SPEED = 10000
     let AUTOPLAY = true        
 
     let random = new Random(DateTime.Now.Millisecond)  
@@ -50,9 +48,6 @@ let main argv =
 
     let getNumber () = if DOUBLE_ZERO then random.Next(37) else random.Next(36)
 
-    let playAgain balance slips = 
-        balance > -STOP_LOSS 
-        && slips <= MAX_SLIPS
 
     // # Print functions
     
@@ -82,14 +77,14 @@ let main argv =
     let saveLogs logs = 
         System.IO.File.WriteAllLines(sprintf "log_%s.csv" (DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss")), Array.ofList logs)
 
-    let saveResult result =
-        let result = sprintf "%O Spins:%d Wins:%d Losses:%d InitialBalance:%f FinalBalance:<not calculated> \n" 
-                         (DateTime.Now.ToString("o")) // DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss")
+    let saveResult result strategy =
+        let result = sprintf "%O Spins:%d \tWins:%d \tLosses:%d \tWin/Lost:%s \tStrategy:%s \n" 
+                         (DateTime.Now.ToShortTimeString())
                          result.Spins
                          result.Wins
                          result.Losses
-                         result.InitialBalance
-                         //result.FinalBalance
+                         (String.Format("{0:n1}", (float)result.Wins/(float)result.Losses) )
+                         strategy
         System.IO.File.AppendAllText("Results.log", result)
 
 
@@ -103,8 +98,7 @@ let main argv =
         let action = getAction suggestion
         printAction action
 
-        if action = Stop then
-            result, logs
+        if action = Stop then result,logs
         else       
             System.Threading.Thread.Sleep(1000/SPEED)
             let number = getNumber()
@@ -129,18 +123,16 @@ let main argv =
                                          Spins = spinsCounter
                                          Wins = result.Wins + if betResult = Won then 1 else 0
                                          Losses = result.Losses + if betResult = Lost then 1 else 0
-                                         //FinalBalance = 
             }
 
-            if playAgain result.FinalBalance spinsCounter 
+            if (*balance > -STOP_LOSS *) spinsCounter <= MAX_SLIPS  
             then play (number::previousNumbers) (spinsCounter+1) newResult (log::logs)
-            else 
-                result, logs
+            else result,logs
 
     let gameResult,logs = play (getInitialNumbers PREVIOUS_NUMBERS) 1 (GameResult.New()) []
     
     saveLogs ("Spin,Number,Bet,Result"::(List.rev logs))
-    saveResult gameResult
+    saveResult gameResult ("strategy 2")
          
     Console.WriteLine("END")
 
