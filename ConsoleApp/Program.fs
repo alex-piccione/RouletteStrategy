@@ -19,6 +19,8 @@ let main argv =
     let random = new Random(DateTime.Now.Millisecond)  
 
     let getKey () = Console.ReadKey().KeyChar 
+    
+    let (+>) = fun a b -> a + "\n" + b
 
     let rec getAction (suggestion:Bet) :Action = 
 
@@ -29,13 +31,13 @@ let main argv =
         else
             let isSuggested bet = if suggestion = bet then " <-- suggested" else ""
 
-            let output = "\n\tChoose a dozen: "
-                       + "\n\t(1) 1-12  + 13-24 " + isSuggested Bet.D1_D2
-                       + "\n\t(2) 1-12  + 25-36 " + isSuggested Bet.D1_D3
-                       + "\n\t(3) 13-24 + 25-36 " + isSuggested Bet.D2_D3
-                       + "\n\t(S) Skip          " + isSuggested Bet.Skip
-                       + "\n\t(X) Stop          "
-                       + "\n\t: "
+            let output = "\n\tChoose a dozen: " +>
+                         "\t(1) 1-12  + 13-24 " + isSuggested Bet.D1_D2 +>
+                         "\t(2) 1-12  + 25-36 " + isSuggested Bet.D1_D3 +>
+                         "\t(3) 13-24 + 25-36 " + isSuggested Bet.D2_D3 +>
+                         "\t(S) Skip          " + isSuggested Bet.Skip +>
+                         "\t(X) Stop          " +>
+                         "\t: "
             Console.Write output
                 
             match getKey() with
