@@ -1,2 +1,2 @@
 # RouletteStrategy
-Play with F# while test some Roulette strategies
+Practice with F# while test some Roulette strategies
