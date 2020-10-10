@@ -72,3 +72,12 @@ module Strategy =
     //    | Area.Two -> Suggestion.Two_Three
     //    | Area.Three -> Suggestion.One_Two
     //    | _ -> Suggestion.None
+
+
+    let fate = new System.Random(System.DateTime.Now.Millisecond)
+    let strategy_random = fun (previousNumbers:int list) in_a_row ->
+        match fate.Next(1,3) with        
+        | 1 -> Bet.D1_D2
+        | 2 -> Bet.D1_D2
+        | 3 -> Bet.D1_D2
+        | _ -> Bet.Skip

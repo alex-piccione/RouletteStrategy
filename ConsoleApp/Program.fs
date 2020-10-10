@@ -87,13 +87,14 @@ let main argv =
                          strategy
         System.IO.File.AppendAllText("Results.log", result)
 
+    let strategy,strategyName = strategy_random,"random"
 
     // main loop
     let rec play previousNumbers spinsCounter result logs =  
         printSpin spinsCounter       
         printNumbers previousNumbers
 
-        let suggestion = strategy_2 previousNumbers PREVIOUS_NUMBERS
+        let suggestion = strategy previousNumbers PREVIOUS_NUMBERS
 
         let action = getAction suggestion
         printAction action
@@ -118,7 +119,7 @@ let main argv =
 
             printResult betResult
 
-            let log = sprintf "%d,%d,%O,%O" spinsCounter number action result
+            let log = sprintf "%d,%d,%O,%O" spinsCounter number (if action = Action.Skip then "Skip" else action.ToString()) betResult
             let newResult = { result with
                                          Spins = spinsCounter
                                          Wins = result.Wins + if betResult = Won then 1 else 0
@@ -132,7 +133,7 @@ let main argv =
     let gameResult,logs = play (getInitialNumbers PREVIOUS_NUMBERS) 1 (GameResult.New()) []
     
     saveLogs ("Spin,Number,Bet,Result"::(List.rev logs))
-    saveResult gameResult ("strategy 2")
+    saveResult gameResult strategyName
          
     Console.WriteLine("END")
 
