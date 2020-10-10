@@ -10,11 +10,17 @@ module Entities =
         | D3 // 25 to 36
 
 
-    type Suggestion =
-        | None
+    type Bet =
+        | Skip
         | D1_D2   //  1-12 + 13-24
         | D1_D3   //  1-12 + 25-36
         | D2_D3   // 23-24 + 25-36
+
+
+    type Action =
+        | Bet of Bet
+        | Skip
+        | Stop
 
 
     type SpinResult =

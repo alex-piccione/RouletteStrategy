@@ -43,10 +43,10 @@ module Strategy =
         let notAppearedArea = checkPrevious numbersToCheck (0,0,0)
 
         match notAppearedArea with
-        | Area.D1 -> Suggestion.D2_D3  
-        | Area.D2 -> Suggestion.D1_D3
-        | Area.D3 -> Suggestion.D1_D2
-        | _ -> Suggestion.None
+        | Area.D1 -> Bet.D2_D3  
+        | Area.D2 -> Bet.D1_D3
+        | Area.D3 -> Bet.D1_D2
+        | _ -> Bet.Skip
 
 
 
