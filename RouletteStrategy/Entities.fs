@@ -5,9 +5,9 @@ module Entities =
     type Area =
         | Zero
         //| DoubleZero
-        | One   // 1 to 12
-        | Two   // 13 to 24
-        | Three // 25 to 36
+        | D1 // 1 to 12
+        | D2 // 13 to 24
+        | D3 // 25 to 36
 
 
     type Suggestion =

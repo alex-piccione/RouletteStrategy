@@ -5,8 +5,6 @@ open System
 open RouletteStrategy.Entities
 open RouletteStrategy.Strategy
 
-
-
 [<EntryPoint>]
 let main argv =
     printfn "Roulette Strategy Tester \n"
@@ -84,21 +82,7 @@ let main argv =
             | x when x = n -> numbers
             | _ -> addNumber (getNumber()::numbers)
         addNumber []
-
-
-    // Strategies
-
-    let getArea number =
-        match number with 
-        | n when n>=1 && n<=12 -> Area.One
-        | n when n>=13 && n<=24 -> Area.Two
-        | n when n>=25 && n<=36 -> Area.Three
-        | _ -> Area.Zero
-
-   
-
-    let calculateSuggestion previousNumbers strategy = strategy previousNumbers
-            
+                    
     let saveLogs logs = 
         System.IO.File.WriteAllLines(sprintf "log_%s.csv" (DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss")), Array.ofList logs)
 
@@ -108,7 +92,7 @@ let main argv =
         printSpin spinsCounter       
         printNumbers previousNumbers
 
-        let suggestion = calculateSuggestion previousNumbers strategy_2 PREVIOUS_NUMBERS
+        let suggestion = RouletteStrategy.Strategy.strategy_2 previousNumbers PREVIOUS_NUMBERS
 
         let input, choice = getBet(suggestion)
         printChoice choice
